@@ -76,7 +76,7 @@
     // "space-before-function-paren": 0,
     "@next/next/no-img-element": "off",
     "@typescript-eslint/no-unused-vars": [
-      "error",
+      1,
       {
         "vars": "all",
         "args": "after-used",
@@ -85,7 +85,7 @@
       }
     ],
     "no-unused-vars": [
-      "error",
+      1,
       {
         "vars": "all",
         "args": "after-used",

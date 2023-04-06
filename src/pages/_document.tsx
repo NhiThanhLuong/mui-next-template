@@ -1,7 +1,16 @@
 import * as React from "react";
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps,
+} from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
-import createEmotionCache from "@/utility/createEmotionCache";
+import { AppType } from "next/app";
+import { EmotionCache } from "@emotion/cache";
+import createEmotionCache from "@/utility/create-emotion-cache";
 
 export default class MyDocument extends Document {
   render() {
@@ -26,7 +35,9 @@ export default class MyDocument extends Document {
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
-MyDocument.getInitialProps = async (ctx) => {
+MyDocument.getInitialProps = async (
+  ctx: DocumentContext
+): Promise<DocumentInitialProps> => {
   // Resolution order
   //
   // On the server:
@@ -58,8 +69,10 @@ MyDocument.getInitialProps = async (ctx) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App: any) => (props) =>
-        <App emotionCache={cache} {...props} />,
+      enhanceApp:
+        (App: AppType | React.ComponentType<{ emotionCache: EmotionCache }>) =>
+        (props) =>
+          <App emotionCache={cache} {...props} />,
     });
 
   const initialProps = await Document.getInitialProps(ctx);

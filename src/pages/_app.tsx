@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import ThemeProvider from "@/theme/theme-provider";
-import createEmotionCache from "@/utility/createEmotionCache";
+import createEmotionCache from "@/utility/create-emotion-cache";
 import { EmotionCache } from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
@@ -39,7 +39,7 @@ export default function MyApp(props: MyAppProps) {
       <ThemeProvider>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </ThemeProvider>
     </CacheProvider>
   );
