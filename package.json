@@ -3,11 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 4000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "preinstall": "npx only-allow pnpm",
     "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "eslint --ext ./src --fix"
+    ],
+    "./src/**": [
+      "prettier --write ."
+    ]
   },
   "dependencies": {
     "-": "^0.0.1",
